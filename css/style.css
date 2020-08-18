@@ -1,0 +1,58 @@
+img{
+    max-width: 50% !important;
+    display: block;
+    margin: 0 auto;
+    height: auto;
+    font-size: .8rem;
+    position: relative;
+    line-height: 2;
+    min-height: 50px;
+}
+
+p{
+    text-align: justify;
+    font-family: freshman,Georgia,"liberation serif",serif;
+    font-size: .85rem;
+
+}
+
+code {
+    font-style: italic;
+    font-size: inherit;
+    font-family: inherit;
+    padding: 2px 5px;
+    background-color: #ecebe9;
+    border-radius: 4px;
+}
+
+div.highlight {
+    margin-bottom: 1 rem;
+    position: relative;
+}
+
+.chroma {
+    color: #d0d0d0;
+    background-color: #202020;
+}
+pre {
+    line-height: 1;
+    padding: 20px;
+    border-radius: 4px;
+    overflow-x: auto;
+    -moz-tab-size: 4!important;
+    tab-size: 4!important;
+}
+
+code[class*=language-], pre[class*=language-] {
+    margin-top: 0;
+    font-family: SFMono-Regular,Consolas,Ubuntu Mono,Liberation Mono,Menlo,monospace;
+    line-height: 1.1rem;
+}
+
+pre code {
+    padding: 0;
+    background-color: initial;
+    font-size: 16px!important;
+    font-family: SFMono-Regular,Consolas,Ubuntu Mono,Liberation Mono,Menlo,monospace!important;
+    font-style: normal;
+}
