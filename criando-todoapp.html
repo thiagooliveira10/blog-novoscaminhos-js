@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Criando um TodoApp</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="css/all.min.css" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+    type='text/css'>
+  <link
+    href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+    rel='stylesheet' type='text/css'>
+
+  <!-- Custom styles for this template -->
+  <link href="css/clean-blog.min.css" rel="stylesheet">
+  
+  <link href="css/new.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Dev. Iniciantes</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="post.html">Criando ToDo</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 mx-auto">
+          <div class="post-heading">
+            <h1>Como construir um aplicativo Todo List com JavaScript puro</h1>
+            <h2 class="subheading">Construir um aplicativo de lista de tarefas é famoso exercício para aprender conceitos úteis
+              que são amplamente aplicáveis ​​em muitos contextos de programação.</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Post Content -->
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 mx-auto">
+         
+          <p>
+          <h1>Pré-requisitos</h1>
+          Este tutorial presume que você tenha um conhecimento básico de JavaScript. Essencialmente, você precisa saber
+          o que são variáveis,
+          arrays, funções e objetos, mas não precisa ter experiência anterior com a construção de aplicativos
+          JavaScript.
+
+          </p>
+
+          <p>
+            <h1>Iniciando</h1>
+            O aplicativo de lista de tarefas que construíremos neste tutorial será bem básico, porém, talvez o mais
+            extenso
+            aplicativo para quem está dandos os primeiros passos de programação.
+            
+            <br /><br />
+
+            <figure>
+              <img src="https://ik.imagekit.io/freshman/final-app_dPFLhFnTI.gif" alt="GIF do aplicativo final">
+              <figcaption>
+                <p>
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;">Veja a </font>
+                  </font>
+                  <a href="https://thiagooliveira10.github.io/todoapp-js" target="_blank">
+                    thiagooliveira10.github.io/todoapp-js  
+                  </a>
+                  <font style="vertical-align: inherit;">
+                    <font style="vertical-align: inherit;"> .</font>
+                  </font>
+                </p>
+              </figcaption>
+            </figure>
+
+            <aside class="tutorial-checkpoint f-alert" data-alert="Checkpoint">
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">O código da aplicação final</font>
+              </font>
+              <a href="https://codepen.io/thiagooliveira10/pen/oNxLpGJ" target="_blank" ref="noopener">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">codepen.io/thiagooliveira10</font>
+                </font>
+              </a>
+            </aside>
+
+            Um usuário pode adicionar uma tarefa, marcar uma tarefa
+            como concluída e excluir uma tarefa já adicionada. Explicarei como construir cada recurso, mas você deve
+            acompanhar digitando o código e
+            executando-o para obter o máximo deste tutorial.
+
+          </p>
+
+          <p>
+            <h1>Passo 0: Código Inicial</h1>
+            Uma vez que não faz parte do escopo detalhar o código HTML e CSS, vamos já dispobilizá-lo no link a seguir. Copie os códigos e um arquivo <code>index.html</code>, 
+            um arquivo <code>main.css</code> e um arquivo <code>app.js</code>, ainda vazio.
+            <br/><br/>
+
+            <aside class="tutorial-checkpoint f-alert" data-alert="Checkpoint">
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">veja o código inicial de HTML e CSS</font>
+              </font><a href=https://codepen.io/thiagooliveira10/pen/vYGKpRq" target="_blank" ref="noopener">
+                <font style="vertical-align: inherit;">
+                  <font style="vertical-align: inherit;">neste link</font>
+                </font>
+              </a>
+            </aside>
+
+            <figure>
+              <img src="./img/projeto.png">
+              <figcaption>
+                <p>
+                  <font style="vertical-align: inherit;">
+                    Seu projeto deve ficar com estes 3 arquivos.
+                  </font>
+                </p>
+              </figcaption>
+            </figure>
+           
+
+
+            
+          </p>
+
+          <p>
+          <h1>Passo 1: Adicionar uma tarefa</h1>
+          
+          Após a criação do projeto, vamos iniciar a edição do <code>app.js</code>, arquivo principal para esse tutorial.
+          
+          A primeira coisa que precisamos fazer é criar um array onde colocaremos os itens da lista de tarefas.
+          Cada item de tarefas será um objeto com três propriedades:
+          <code>text:</code>, com texto que usuário digitar,
+          <code>checked</code>, um booleano para se uma tarefa foi marcada como concluída
+          e <code>id</code>, um identificador.
+
+          <br /> <br />
+
+          Quando uma nova tarefa é adicionada, criamos um novo objeto <code>(todo)</code>, inserimos
+          no array <code>(todoItems)</code>
+          e, adiante, exibiremos o valor da propriedade <code>text</code> na tela.
+          Quando um <code>todo</code> for marcado como concluído, alternamos a propriedade <code>checked</code> para <code>true</code>, e quando o
+          usuário exclui um todo,
+          vamos localizar o item <code>(todo)</code> no array <code>todoItems</code> usando seu <code>id</code>
+          removê-lo.
+
+          <br /><br />
+          Vamos começar adicionando um item a fazer à nossa lista. Para fazer isso, precisamos ouvir o evento
+          <code>submit</code> no elemento do formulário e, em seguida,
+          invocar uma nova função <code>addTodo()</code> quando o formulário for enviado.
+          </p>
+
+          <div class="highlight">
+            <pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// Este é o array que vai os itens a fazer (TODO)
+</span><span class="c1"></span><span class="kd">let</span> <span class="nx">todoItems</span> <span class="o">=</span> <span class="p">[];</span><font></font>
+<font></font>
+<span class="c1">// Esta função vai criar um novo objeto tarefa(ToDo) baseado no
+</span><span class="c1">// texto que foi digitado no input text , e adiciona-lo dentro
+</span><span class="c1">// do array `todoItems` 
+</span><span class="c1"></span><span class="kd">function</span> <span class="nx">addTodo</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">todo</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="nx">text</span><span class="p">,</span>
+        <span class="nx">checked</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nx">id</span><span class="o">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span>
+    <span class="p">};</span><font></font>
+  <font></font>
+  <span class="nx">todoItems</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">todo</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">todoItems</span><span class="p">);</span>
+<span class="p">}</span><font></font>
+<font></font>
+  <span class="c1">// Seleciona o elemento form
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">form</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.js-form'</span><span class="p">);</span>
+<span class="c1">// Add o submit event listener
+</span><span class="c1"></span><span class="nx">form</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'submit'</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// evitar submissão com refresh
+</span><span class="c1"></span>  <span class="nx">event</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+  <span class="c1">// seleciona o input text
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">input</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.js-todo-input'</span><span class="p">);</span><font></font>
+<font></font>
+  <span class="c1">// Pega o valor do input e remove espaços em branco
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">input</span><span class="p">.</span><span class="nx">value</span><span class="p">.</span><span class="nx">trim</span><span class="p">();</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">text</span> <span class="o">!==</span> <span class="s1">''</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">addTodo</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+    <span class="nx">input</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+    <span class="nx">input</span><span class="p">.</span><span class="nx">focus</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+          </div>
+
+          <p>
+            Por padrão, quando um formulário é enviado, o navegador tentará enviá-lo a um servidor, o que causará uma
+            atualização da página. Para evitar que isso aconteça,
+            podemos interromper o comportamento padrão ouvindo o evento <code>submit</code> no formulário e usando
+            <code>event.preventDefault()</code>.
+
+            <br /><br />
+            Em seguida, selecionamos a entrada de texto e removemos os espaços em branco da string
+            com <code>trim()</code>, em seguida, salvamos em uma nova
+            variável chamada <code>text</code>. Se a variável <code>text</code> não for igual a uma string vazia,
+            passamos o texto para a função <code>addTodo()</code> definida mais acima.
+          </p>
+
+          <div class="highlight">
+            <pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">todo</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">text</span><span class="p">,</span>
+  <span class="nx">checked</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="nx">id</span><span class="o">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span>
+<span class="p">};</span>
+</code></pre><button class="copy-code js-copy">
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">cópia de</font>
+              </font>
+            </button></div>
+
+          <p>
+            Dentro da função, criamos um novo objeto para a tarefa(todo) e adicionamos as propriedades que mencionei
+            anteriormente. A propriedade <code>text</code> é definida como
+            argumento da função, o <code>checked</code> inicializada para <code>false</code> e <code>id</code> é
+            inicializada para com o número de <mark>milissegundos decorridos desde 1º de janeiro de 1970</mark>.
+            Assim <code>id</code> será exclusivo para cada item de tarefas<code>(todo)</code>.
+          </p>
+
+          <div class="highlight">
+            <pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">todoItems</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">todo</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">todoItems</span><span class="p">);</span>
+</code></pre><button class="copy-code js-copy">
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">cópia de</font>
+              </font>
+            </button></div>
+
+          <p>
+            Por fim, a tarefa<code>(todo)</code> é adicionada por <code>push</code> ao <code>array todoItems</code>,
+            posteriormente, o array é exibido no console.
+            Após o <code>addTodo(text)</code>, no eventListener do formulário, o valor da entrada de texto é apagado, e
+            recebe uma string vazia. Na última instrução, o foco é colocado
+            novamente no input, afim de facilitar a adição de novos tarefas<code>(todo)</code>.
+          </p>
+
+          <p>
+            Para testar, adicione tarefas e visualize o <code>todoItems</code> o inspecionar do seu navegador. Você verá
+            que cada item de tarefas é representado por um objeto.
+          </p>
+
+          <figure><img src="https://ik.imagekit.io/freshman/add-todo-1_4fGLTr5dy4.png"
+              alt="Console mostrando matriz de objetos de tarefas"></figure>
+
+          <aside class="tutorial-checkpoint f-alert" data-alert="Checkpoint">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Faça uma pausa e veja o </font>
+            </font><a href="https://jsfiddle.net/ayoisaiah/0gxLab39/4/" target="_blank" ref="noopener">
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">código completo</font>
+              </font>
+            </a>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"> no final desta etapa.</font>
+            </font>
+          </aside>
+
+          <h1>Renderizar os itens de tarefas</h1>
+
+          <p>
+            Depois que um novo item de tarefas<code>(todo)</code> é adicionado ao array <code>todoItems</code>, queremos
+            que o aplicativo seja atualizado com o novo item renderizado na tela.
+            Podemos fazer isso facilmente anexando um novo elemento <code>li</code> para cada item ao
+            elemento<code>(ul)</code> do DOM que tem classe <code>.js-todo-list</code>.
+
+            Para conseguir isso, adicione a nova função <code>renderTodo()</code> função acima da
+            <code>addTodo()</code>:
+          </p>
+
+          <aside class="tutorial-checkpoint f-alert">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Veja uma ideia do código final</font>
+            </font><a href="https://codepen.io/thiagooliveira10/pen/abNZroQ" target="_blank" ref="noopener">
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">neste link</font>
+              </font>
+            </a>
+          </aside>
+
+          <div class="highlight">
+            <pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">renderTodo</span><span class="p">(</span><span class="nx">todo</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Primeiro selecionar o elemento com a classe  `js-todo-list`
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">list</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.js-todo-list'</span><span class="p">);</span>
+
+  <span class="c1">// Usando o operator ternário para checar se `todo.checked` é true
+</span><span class="c1"></span>  <span class="c1">// Se sim, atribuir 'done' to `isChecked`. Senão, atribur uma string vazia
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">isChecked</span> <span class="o">=</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">checked</span> <span class="o">?</span> <span class="s1">'done'</span><span class="o">:</span> <span class="s1">''</span><span class="p">;</span>
+  <span class="c1">// Criando um elemento `li` e atribuindo ele ao `node`
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">node</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">"li"</span><span class="p">);</span>
+  <span class="c1">// Setando o atributo class
+</span><span class="c1"></span>  <span class="nx">node</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">'class'</span><span class="p">,</span> <span class="sb">`todo-item </span><span class="si">${</span><span class="nx">isChecked</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+  <span class="c1">// Setando o atributo data-key  com o id do todo
+</span><span class="c1"></span>  <span class="nx">node</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">'data-key'</span><span class="p">,</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+  <span class="c1">// Setando o conteúdo do elemento `li` criado acima
+</span><span class="c1"></span>  <span class="nx">node</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="sb">`
+</span><span class="sb">    &lt;input id="</span><span class="si">${</span><span class="nx">todo</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">" type="checkbox"/&gt;
+</span><span class="sb">    &lt;label for="</span><span class="si">${</span><span class="nx">todo</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">" class="tick js-tick"&gt;&lt;/label&gt;
+</span><span class="sb">    &lt;span&gt;</span><span class="si">${</span><span class="nx">todo</span><span class="p">.</span><span class="nx">text</span><span class="si">}</span><span class="sb">&lt;/span&gt;
+</span><span class="sb">    &lt;button class="delete-todo js-delete-todo"&gt;
+</span><span class="sb">    &lt;svg&gt;&lt;use href="#delete-icon"&gt;&lt;/use&gt;&lt;/svg&gt;
+</span><span class="sb">    &lt;/button&gt;
+</span><span class="sb">  `</span><span class="p">;</span>
+
+  <span class="c1">// adicionando o elemento ao DOM como o último filho do
+</span><span class="c1"></span>  <span class="c1">// elemento referenciado por na variável `list`
+</span><span class="c1"></span>  <span class="nx">list</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">node</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+          </div>
+
+
+          <p>
+            A função <code>renderTodo()</code> tem um objeto <code>todo</code> como seu único parâmetro. Ele constrói um
+            nó <code>li</code> no DOM usando
+            o método <code>document.createElement().</code> Na próxima linha, o atributo <code>class</code> é definido
+            como <code>todo-item ${isChecked}</code>.
+            O valor de <code>isChecked</code> será uma string vazia se a propriedade <code>checked</code> no objeto
+            <code>todo</code> for <code>false</code>.
+            Caso contrário, será <code>'done'</code>. Você verá o efeito dessa classe <code>'done'</code> na próxima
+            seção.
+          </p>
+
+          <p>
+            Em seguida, o atributo <code>data-key</code> também é definido no elemento <code>li</code>. Ele é definido
+            com a propriedade <code>id</code> do
+            objeto <code>todo</code> e será usado para localizar um item específico no DOM posteriormente no tutorial.
+            Em seguida, o conteúdo do elemento
+            <code>li</code> é definido usando o método <code>innerHTML</code> e, finalmente, o elemento <code>li</code>
+            é inserido como o último filho do
+            elemento <code>ul</code> com a classe <code>.js-todo-list</code>.
+          </p>
+
+          <p>
+            Alterando a linha <code>console.log(todoItems)</code> no <code>addTodo()</code> para
+            <code>renderTodo(todo)</code> conforme mostrado abaixo para
+            que a função <code>renderTodo()</code> seja chamada sempre que um novo item de tarefas for adicionado no
+            <code>todoItems</code>.
+          </p>
+
+          <div class="highlight">
+            <pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">addTodo</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">todo</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">text</span><span class="p">,</span>
+    <span class="nx">checked</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">id</span><span class="o">:</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">(),</span>
+  <span class="p">};</span><font></font>
+<font></font>
+  <span class="nx">todoItems</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">todo</span><span class="p">);</span>
+  <span class="nx">renderTodo</span><span class="p">(</span><span class="nx">todo</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre><button class="copy-code js-copy">
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">cópia de</font>
+              </font>
+            </button></div>
+
+          <p>
+            Experimente adicionando alguns itens de tarefas. Todos eles devem ser renderizados na página.
+          </p>
+
+          <figure><img src="https://ik.imagekit.io/freshman/add-todo-2_mFrVwMwaG.png"
+              alt="Imagem de itens de tarefas adicionados à lista"></figure>
+
+          <aside class="tutorial-checkpoint f-alert" data-alert="Checkpoint">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Faça uma pausa e veja o </font>
+            </font><a href="https://jsfiddle.net/ayoisaiah/0gxLab39/7/" target="_blank" ref="noopener">
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">código completo</font>
+              </font>
+            </a>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"> no final desta etapa.</font>
+            </font>
+          </aside>
+
+          <p>
+          <h1>Marque uma tarefa como concluída</h1>
+
+          Vamos adicionar a capacidade de marcar uma tarefa como concluída. Para fazer isso, precisamos ouvir o evento
+          click na caixa de seleção e alternar a
+          propriedade <code>checked</code> no item de tarefa correspondente.
+
+          <br /><br />
+          Adicione o seguinte código na parte inferior do painel JavaScript para detectar o item de tarefas que está
+          sendo marcado:
+          </p>
+          <div class="highlight">
+            <pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="c1">// Selecione a lista complete
+</span><span class="c1"></span><span class="kr">const</span> <span class="nx">list</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.js-todo-list'</span><span class="p">);</span>
+<span class="c1">// Adicione o click event listener para a list e seus filhos
+</span><span class="c1"></span><span class="nx">list</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="s1">'js-tick'</span><span class="p">))</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">itemKey</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">key</span><span class="p">;</span>
+    <span class="nx">toggleDone</span><span class="p">(</span><span class="nx">itemKey</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre><button class="copy-code js-copy">
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">cópia de</font>
+              </font>
+            </button></div>
+
+          <p>
+            Em vez de ouvir cliques em cada elemento <code>checkbox</code> de seleção, estamos ouvindo cliques em todo o
+            contêiner da lista<code>(ul)</code>.
+            Quando ocorre um evento de clique na lista<code>(ul)</code>, uma verificação é feita para garantir que o
+            elemento que foi clicado seja uma caixa de seleção<code>(checkbox)</code>.
+            Nesse caso, o valor do <code>data-key</code> no elemento pai da caixa de seleção é extraído e passado para
+            uma nova função <code>toggleDone()</code>
+            (mostrada a seguir) que deve ser colocada abaixo da função <code>addTodo()</code>.
+          </p>
+
+          <div class="highlight">
+            <pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">toggleDone</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// findIndex é método de array que returna a posição do elemento
+</span><span class="c1"></span>  <span class="c1">// em um array.
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">todoItems</span><span class="p">.</span><span class="nx">findIndex</span><span class="p">(</span><span class="nx">item</span> <span class="p">=&gt;</span> <span class="nx">item</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nb">Number</span><span class="p">(</span><span class="nx">key</span><span class="p">));</span>
+  <span class="c1">// Localiza o item no array todoItems e configura o atributo checked
+</span><span class="c1"></span>  <span class="c1">// para o oposto. Isto significado, `true` deve se tornar `false` and vice
+</span><span class="c1"></span>  <span class="c1">// versa.
+</span><span class="c1"></span>  <span class="nx">todoItems</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">checked</span> <span class="o">=</span> <span class="o">!</span><span class="nx">todoItems</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">checked</span><span class="p">;</span>
+  <span class="nx">renderTodo</span><span class="p">(</span><span class="nx">todoItems</span><span class="p">[</span><span class="nx">index</span><span class="p">]);</span>
+<span class="p">}</span>
+</code></pre>
+          </div>
+
+          <p>
+
+            Esta função recebe a chave do item da lista que foi marcado ou desmarcado e encontra o item correspondente
+            na todoItems usando o método
+            <code>findIndex</code>.
+            Assim que tivermos o índice do item, precisamos localizá-lo no array <code>todoItems</code> usando a notação
+            de colchetes. O valor da propriedade
+            <code>checked</code> no item <code>todo</code> é então definido com o valor oposto.
+
+            Por fim, a função <code>renderTodo()</code> é chamada com o objeto de todo passado. Se você executar o
+            código agora e tentar marcar um item,
+            ele duplicará o item de tarefas em vez de marcar o existente.
+
+          </p>
+
+          <figure><img src="https://ik.imagekit.io/freshman/ezgif.com-crop_gM7Q7g2Xw.gif" alt="GIF of todo list">
+          </figure>
+
+          <p>
+            Para corrigir isso, precisamos primeiro verificar se o item de tarefas atual existe no DOM e substituí-lo
+            pelo nó atualizado, se existir.
+            Altere a função <code>renderTodo()</code> conforme mostrado abaixo:
+          </p>
+
+          <div class="highlight">
+            <pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">renderTodo</span><span class="p">(</span><span class="nx">todo</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">list</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.js-todo-list'</span><span class="p">);</span>
+  <span class="c1">// selecione o atual item  de todo no DOM
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">item</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="sb">`[data-key='</span><span class="si">${</span><span class="nx">todo</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">']`</span><span class="p">);</span><font></font>
+<font></font>
+  <span class="kr">const</span> <span class="nx">isChecked</span> <span class="o">=</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">checked</span> <span class="o">?</span> <span class="s1">'done'</span><span class="o">:</span> <span class="s1">''</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="nx">node</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">"li"</span><span class="p">);</span>
+  <span class="nx">node</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">'class'</span><span class="p">,</span> <span class="sb">`todo-item </span><span class="si">${</span><span class="nx">isChecked</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+  <span class="nx">node</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">'data-key'</span><span class="p">,</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+  <span class="nx">node</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="sb">`
+</span><span class="sb">    &lt;input id="</span><span class="si">${</span><span class="nx">todo</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">" type="checkbox"/&gt;
+</span><span class="sb">    &lt;label for="</span><span class="si">${</span><span class="nx">todo</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">" class="tick js-tick"&gt;&lt;/label&gt;
+</span><span class="sb">    &lt;span&gt;</span><span class="si">${</span><span class="nx">todo</span><span class="p">.</span><span class="nx">text</span><span class="si">}</span><span class="sb">&lt;/span&gt;
+</span><span class="sb">    &lt;button class="delete-todo js-delete-todo"&gt;
+</span><span class="sb">    &lt;svg&gt;&lt;use href="#delete-icon"&gt;&lt;/use&gt;&lt;/svg&gt;
+</span><span class="sb">    &lt;/button&gt;
+</span><span class="sb">  `</span><span class="p">;</span><font></font>
+<font></font>
+  <span class="c1">// Se o item já existir no DOM
+</span><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// substituir
+</span><span class="c1"></span>    <span class="nx">list</span><span class="p">.</span><span class="nx">replaceChild</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">item</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// senão, adicionar ele ao fim da lista
+</span><span class="c1"></span>    <span class="nx">list</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">node</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+          </div>
+
+          <p>
+            Primeiro, o item de tarefa atual é selecionado<code>(todo)</code>. Se existir no dom , o elemento será
+            retornado e posteriormente substituído.
+            Se o item não existir (como é o caso de novos itens a fazer), ele será adicionado ao final da lista.
+          </p>
+
+          <figure><img src="https://ik.imagekit.io/freshman/ezgif.com-crop__1__eT3PEPOemIP.gif"
+              alt="Itens de todo podem ser verificados"></figure>
+
+          <aside class="tutorial-checkpoint f-alert" data-alert="Checkpoint">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Faça uma pausa e veja o </font>
+            </font><a href="https://jsfiddle.net/ayoisaiah/0gxLab39/10/" target="_blank" ref="noopener">
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">código completo</font>
+              </font>
+            </a>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"> no final desta etapa.</font>
+            </font>
+          </aside>
+
+          <p>
+          <h1>Excluir itens de tarefas</h1>
+
+          Semelhante à forma como implementamos o último recurso, ouviremos os cliques no elemento
+          <code>.js-delete-todo</code>, em seguida, pegaremos a chave do pai
+          <code>(li)</code> e a passará para uma nova função <code>deleteTodo</code> que removerá o objeto de
+          tarefa<code>(todo)</code> correspondente no
+          todoItem enviaremos o item de tarefas <code>renderTodo()</code> para ser removido do DOM.
+
+          <br /><br />
+          Primeiro, vamos detectar quando o botão de exclusão é clicado:
+
+          <div class="highlight">
+            <pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kr">const</span> <span class="nx">list</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.js-todo-list'</span><span class="p">);</span>
+    <span class="nx">list</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'click'</span><span class="p">,</span> <span class="nx">event</span> <span class="p">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="s1">'js-tick'</span><span class="p">))</span> <span class="p">{</span>
+        <span class="kr">const</span> <span class="nx">itemKey</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">key</span><span class="p">;</span>
+        <span class="nx">toggleDone</span><span class="p">(</span><span class="nx">itemKey</span><span class="p">);</span>
+      <span class="p">}</span><font></font>
+    <font></font>
+      <span class="c1">// ADD ESSE BLOCO
+    </span><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">classList</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="s1">'js-delete-todo'</span><span class="p">))</span> <span class="p">{</span>
+        <span class="kr">const</span> <span class="nx">itemKey</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">parentElement</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">key</span><span class="p">;</span>
+        <span class="nx">deleteTodo</span><span class="p">(</span><span class="nx">itemKey</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+    </code></pre>
+          </div>
+          </p>
+
+          <p>
+            Em seguida, crie uma função <code>deleteTodo()</code> abaixo de <code>toggleDone()</code> conforme mostrado
+            abaixo:
+
+          <div class="highlight">
+            <pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">deleteTodo</span><span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// pesquisa o correspondente objeto todo no array todoItems
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">todoItems</span><span class="p">.</span><span class="nx">findIndex</span><span class="p">(</span><span class="nx">item</span> <span class="p">=&gt;</span> <span class="nx">item</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nb">Number</span><span class="p">(</span><span class="nx">key</span><span class="p">));</span>
+  <span class="c1">// Cria um novo objeto com propriedades do atual todo item
+</span><span class="c1"></span>  <span class="c1">// e a propriedade `deleted` que é definido como verdadeiro
+</span><span class="c1"></span>  <span class="kr">const</span> <span class="nx">todo</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">deleted</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="p">...</span><span class="nx">todoItems</span><span class="p">[</span><span class="nx">index</span><span class="p">]</span>
+  <span class="p">};</span>
+  <span class="c1">// remova o item todo a partir do array filtrado e uma nova atribuição a todoItems
+</span><span class="c1"></span>  <span class="nx">todoItems</span> <span class="o">=</span> <span class="nx">todoItems</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">item</span> <span class="p">=&gt;</span> <span class="nx">item</span><span class="p">.</span><span class="nx">id</span> <span class="o">!==</span> <span class="nb">Number</span><span class="p">(</span><span class="nx">key</span><span class="p">));</span>
+  <span class="nx">renderTodo</span><span class="p">(</span><span class="nx">todo</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+          </div>
+          <br />
+          A função <code>renderTodo()</code> também necessita ser atualizado como a seguir:
+          <br />
+          <div class="highlight">
+            <pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="nx">renderTodo</span><span class="p">(</span><span class="nx">todo</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">list</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="s1">'.js-todo-list'</span><span class="p">);</span>
+  <span class="kr">const</span> <span class="nx">item</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="sb">`[data-key='</span><span class="si">${</span><span class="nx">todo</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">']`</span><span class="p">);</span>
+
+  <span class="c1">// ADICIONE ESSE BLOCO IF
+</span><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nx">todo</span><span class="p">.</span><span class="nx">deleted</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// remove esse item do DOM
+</span><span class="c1"></span>    <span class="nx">item</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+    <span class="k">return</span>
+  <span class="p">}</span>
+
+  <span class="kr">const</span> <span class="nx">isChecked</span> <span class="o">=</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">checked</span> <span class="o">?</span> <span class="s1">'done'</span><span class="o">:</span> <span class="s1">''</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="nx">node</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">"li"</span><span class="p">);</span>
+  <span class="nx">node</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">'class'</span><span class="p">,</span> <span class="sb">`todo-item </span><span class="si">${</span><span class="nx">isChecked</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+  <span class="nx">node</span><span class="p">.</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">'data-key'</span><span class="p">,</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+  <span class="nx">node</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="sb">`
+</span><span class="sb">    &lt;input id="</span><span class="si">${</span><span class="nx">todo</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">" type="checkbox"/&gt;
+</span><span class="sb">    &lt;label for="</span><span class="si">${</span><span class="nx">todo</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">" class="tick js-tick"&gt;&lt;/label&gt;
+</span><span class="sb">    &lt;span&gt;</span><span class="si">${</span><span class="nx">todo</span><span class="p">.</span><span class="nx">text</span><span class="si">}</span><span class="sb">&lt;/span&gt;
+</span><span class="sb">    &lt;button class="delete-todo js-delete-todo"&gt;
+</span><span class="sb">    &lt;svg&gt;&lt;use href="#delete-icon"&gt;&lt;/use&gt;&lt;/svg&gt;
+</span><span class="sb">    &lt;/button&gt;
+</span><span class="sb">  `</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">list</span><span class="p">.</span><span class="nx">replaceChild</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">item</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">list</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">node</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+          </div>
+          <br />
+          Agora, você deve ser capaz de excluir tarefas clicando no botão excluir.
+
+          <figure><img src="https://ik.imagekit.io/freshman/ezgif-5-1b9c4cfb64c0_2mUcPUKot.gif" alt="Excluir todo GIF">
+          </figure>
+
+          <aside class="tutorial-checkpoint f-alert" data-alert="Checkpoint">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Faça uma pausa e veja o </font>
+            </font><a href="https://jsfiddle.net/ayoisaiah/0gxLab39/13/" target="_blank" ref="noopener">
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">código completo</font>
+              </font>
+            </a>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"> no final desta etapa.</font>
+            </font>
+          </aside>
+
+          </p>
+
+          <p>
+          <h1>Adicionar um prompt de estado vazio</h1>
+
+          Um estado vazio ocorre quando não há dados para mostrar no aplicativo. Por exemplo, quando o usuário ainda não
+          adicionou uma tarefa (primeiro uso) ou quando o usuário apagou a lista.
+          É importante levar em conta esse estado ao projetar um aplicativo.
+          <br /><br />
+          Quando não houver tarefas a serem exibidas, adicionaremos um prompt que incentiva o usuário a adicionar uma
+          nova tarefa. Este recurso pode ser implementado apenas com html e css .
+          <br /><br />
+          Tiraremos vantagem do seletor :empty css para exibir o prompt condicionalmente apenas se nenhum item existir
+          na lista.
+          <br /><br />
+          Adicione o seguinte código para o prompt de estado vazio no painel html, conforme mostrado abaixo:
+
+          <br />
+          <div class="highlight">
+            <pre class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">main</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"container"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">"app-title"</span><span class="p">&gt;</span>todos<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">"todo-list js-todo-list"</span><span class="p">&gt;&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- ADICIONE ESSE BLOCO AQUI --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"empty-state"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">svg</span> <span class="na">class</span><span class="o">=</span><span class="s">"checklist-icon"</span><span class="p">&gt;&lt;</span><span class="nt">use</span> <span class="na">href</span><span class="o">=</span><span class="s">"#checklist-icon"</span><span class="p">&gt;&lt;/</span><span class="nt">use</span><span class="p">&gt;&lt;/</span><span class="nt">svg</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h2</span> <span class="na">class</span><span class="o">=</span><span class="s">"empty-state__title"</span><span class="p">&gt;</span>Add your first todo<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">"empty-state__description"</span><span class="p">&gt;</span>What do you want to get done today?<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="c">&lt;!-- FIM DO BLOCO ADICIONADO --&gt;</span>
+    <span class="p">&lt;</span><span class="nt">form</span> <span class="na">class</span><span class="o">=</span><span class="s">"todo-form js-form"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">autofocus</span> <span class="na">type</span><span class="o">=</span><span class="s">"text"</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">"Enter a new todo item"</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">"E.g. Build a web app"</span> <span class="na">class</span><span class="o">=</span><span class="s">"js-todo-input"</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">main</span><span class="p">&gt;</span>
+</code></pre>
+          </div>
+          </p>
+
+          <br /><br />
+
+          <div class="highlight">
+            <pre class="chroma"><code class="language-css" data-lang="css"><span class="c">/* ADICIONE ABAIXO DOS OUTROS ESTILOS */</span><font></font>
+  <font></font>
+  <span class="p">.</span><span class="nc">empty-state</span> <span class="p">{</span>
+    <span class="k">flex-direction</span><span class="p">:</span> <span class="kc">column</span><span class="p">;</span>
+    <span class="k">align-items</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
+    <span class="k">justify-content</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
+    <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
+  <span class="p">}</span><font></font>
+  <font></font>
+  <span class="p">.</span><span class="nc">checklist-icon</span> <span class="p">{</span>
+    <span class="k">margin-bottom</span><span class="p">:</span> <span class="mi">20</span><span class="kt">px</span><span class="p">;</span>
+  <span class="p">}</span><font></font>
+  <font></font>
+  <span class="p">.</span><span class="nc">empty-state__title</span><span class="o">,</span> <span class="p">.</span><span class="nc">empty-state__description</span> <span class="p">{</span>
+    <span class="k">margin-bottom</span><span class="p">:</span> <span class="mi">20</span><span class="kt">px</span><span class="p">;</span>
+  <span class="p">}</span></code></pre>
+          </div>
+
+          <br /><br />
+          Embora pareça normal, o problema é que a mensagem persiste mesmo quando uma tarefa é adicionada à lista. O
+          comportamento pretendido é que a mensagem desapareça depois que uma tarefa for
+          adicionada e só reapareça quando não haver mais tarefas a serem exibidas.
+
+          <figure><img src="https://ik.imagekit.io/freshman/empty-state-bug_i8TIEw8JiM.png"
+              alt="O prompt de estado vazio não fica oculto quando uma tarefa é adicionada"></figure>
+
+          <br /><br />
+          Este trecho de CSS nos dará o que queremos:
+
+          <div class="highlight">
+            <pre class="chroma"><code class="language-css" data-lang="css"><span class="c">/* Altere `display: flex` para `display: none` */</span>
+    <span class="p">.</span><span class="nc">empty-state</span> <span class="p">{</span>
+      <span class="k">flex-direction</span><span class="p">:</span> <span class="kc">column</span><span class="p">;</span>
+      <span class="k">align-items</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
+      <span class="k">justify-content</span><span class="p">:</span> <span class="kc">center</span><span class="p">;</span>
+      <span class="k">display</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
+    <span class="p">}</span><font></font>
+    <font></font>
+    <span class="c">/* Add this below the other styles */</span>
+    <span class="p">.</span><span class="nc">todo-list</span><span class="p">:</span><span class="nd">empty</span> <span class="p">{</span>
+      <span class="k">display</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
+    <span class="p">}</span><font></font>
+    <font></font>
+    <span class="p">.</span><span class="nc">todo-list</span><span class="p">:</span><span class="nd">empty</span> <span class="o">+</span> <span class="p">.</span><span class="nc">empty-state</span> <span class="p">{</span>
+      <span class="k">display</span><span class="p">:</span> <span class="kc">flex</span><span class="p">;</span>
+    <span class="p">}</span></code></pre>
+          </div>
+
+          <br />
+          O elemento <code>.empty-state</code> está oculto por padrão com <code>display: none</code> e só aparece quando
+          <code>.todo-list</code> está vazio. Estamos usando o seletor <code>:empty</code>
+          para detectar quando <code>.todo-list</code> está vazio e o seletor irmão(sibling)<code>(+)</code> para
+          direcionar <code>.empty-state</code> e aplicar <code>display: flex</code> a ele
+          apenas quando <code>.todo-list</code> está vazio.
+          <br /><br />
+          <aside class="tutorial-checkpoint f-alert" data-alert="Checkpoint">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Faça uma pausa e veja o </font>
+            </font><a href="https://jsfiddle.net/ayoisaiah/0gxLab39/15/" target="_blank" ref="noopener">
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">código completo</font>
+              </font>
+            </a>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"> no final desta etapa.</font>
+            </font>
+          </aside>
+
+
+          <p>
+          <h1>Persistir os dados do aplicativo</h1>
+
+          Nosso aplicativo de lista de tarefas está praticamente completo neste ponto, mas vamos adicionar mais um
+          recurso para tornar as coisas um pouco mais interessantes e realistas. No momento,
+          uma vez que a página é atualizada, todos os itens a fazer são apagados. Vamos evitar isso persistindo o estado
+          do aplicativo no armazenamento local do navegador .
+
+          <br />
+          Adicione esta linha na parte superior da sua função <code>renderTodo():</code>
+          <br /><br />
+
+          <div class="highlight">
+            <pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">'todoItemsRef'</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">todoItems</span><span class="p">));</span>
+    </code></pre><button class="copy-code js-copy">
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">cópia de</font>
+              </font>
+            </button></div>
+          </p>
+
+          <p>
+
+            Apenas strings podem ser armazenadas no <code>localStorage</code>, portanto, precisamos primeiro converter
+            nossa <code>todoItems</code> em uma string <code>JSON</code> antes de passá-la para o método
+            <code>setItem</code> que adiciona um novo item de dados na chave especificada.
+            <br />
+            Cada vez que a função <code>renderTodo()</code> é chamada, o valor de <code>todoItemsRef</code> no
+            <code>localStorage</code> será substituído pelo valor atual da <code>todoItems</code>. Dessa forma,
+            o array e a referência do <code>localStorage</code> correspondente são mantidas em sincronia.
+            <br />
+            Você pode testar isso abrindo as ferramentas de desenvolvimento do navegador, navegue até a guia Aplicativo
+            e monitore a seção Armazenamento local. Se você não estiver usando o Chrome, as ferramentas de
+            desenvolvimento podem ser organizadas de forma diferente.
+          </p>
+
+          <figure><img src="https://ik.imagekit.io/freshman/2020-06-29_15-50_8xkUQQI3H.png"
+              alt="Ferramentas de desenvolvimento do Chrome mostrando a seção de armazenamento local"></figure>
+
+          <p>
+            A etapa final é renderizar todos os itens da lista de tarefas existentes quando a página for carregada.
+            Adicione o seguinte snippet de código na parte inferior do painel JavaScript:
+          </p>
+
+          <div class="highlight">
+            <pre class="chroma"><code class="language-javascript" data-lang="javascript"><span class="nb">document</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'DOMContentLoaded'</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">ref</span> <span class="o">=</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s1">'todoItemsRef'</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">ref</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">todoItems</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">ref</span><span class="p">);</span>
+      <span class="nx">todoItems</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">t</span> <span class="p">=&gt;</span> <span class="p">{</span>
+        <span class="nx">renderTodo</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+  </code></pre>
+          </div>
+
+          <p>
+            Quando o DOMContentLoadedevento é disparado, procedemos para recuperar o valor de todoItemsRefdo
+            localStorage. Se existir, o JSON.parsemétodo é usado para converter a string JSON de volta à sua forma de
+            array original e salvá-la em todoItems.
+
+            Em seguida, <code>renderTodo()</code> é invocado para cada objeto de tarefa<code>(todo)</code> presente na
+            array. Isso faz com que todos os itens de tarefas salvos sejam renderizados assim que a página carregar.
+          </p>
+
+          <p>
+          <aside class="tutorial-checkpoint f-alert" data-alert="Checkpoint">
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;">Faça uma pausa e veja o </font>
+            </font><a href="https://jsfiddle.net/ayoisaiah/0gxLab39/18/" target="_blank" ref="noopener">
+              <font style="vertical-align: inherit;">
+                <font style="vertical-align: inherit;">código completo</font>
+              </font>
+            </a>
+            <font style="vertical-align: inherit;">
+              <font style="vertical-align: inherit;"> no final desta etapa.</font>
+            </font>
+          </aside>
+          </p>
+
+          <p>
+            <h1>Embrulhar</h1>
+
+            Neste tutorial, construímos com sucesso um aplicativo de lista de tarefas que permite ao usuário adicionar novas tarefas, marcar uma tarefa como concluída e excluir as antigas. Também discutimos a 
+            importância de tratar os estados vazios ao projetar um aplicativo e, em seguida, passamos a falar sobre um problema potencial ao usar o seletor <code>:empty</code>.
+            <br/>
+            Por fim, discutimos a persistência do estado do aplicativo no <code>localStorage</code> do navegador e como contornar suas limitações usando <code>JSON.stringify</code> e <code>JSON.parse</code>. 
+
+            Obrigado por ler e feliz codificação!
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <hr>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 mx-auto">
+          <ul class="list-inline text-center">
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+          </ul>
+          <p class="copyright text-muted">Copyright &copy; Your Website 2020</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/clean-blog.min.js"></script>
+
+</body>
+
+</html>
